@@ -1,0 +1,10 @@
+bcrypt
+RPi.GPIO
+pytz
+Django>=1.8,<2.0
+sentry_sdk
+django_dotenv
+redis
+djangorestframework-jwt
+mysqlclient
+PyJWT
