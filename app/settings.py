@@ -14,28 +14,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = [
-    u'mrjosh.ir',
     u'localhost',
     u'127.0.0.1',
-    u'192.168.1.3',
-    u'smartdoor'
 ]
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.sessions',
-    'tika',
+    'app',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tika.middlewares.HttpNotFoundExceptionMiddleware',

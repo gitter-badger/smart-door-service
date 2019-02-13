@@ -12,7 +12,16 @@ def update_succeeded():
 
 
 def failed(message="", status_code=400):
-    content = json.dumps({"status": "failed", "message": message})
+    content = json.dumps({"status": "fail", "message": message})
+    return HttpResponse(content, content_type="application/json", status=status_code)
+
+
+def method_not_allowed():
+    return failed("Oops... The method you requested is not allowed!", 405)
+
+
+def validation_error(errors=None, status_code=422):
+    content = json.dumps({"status": "failed", "result": errors})
     return HttpResponse(content, content_type="application/json", status=status_code)
 
 

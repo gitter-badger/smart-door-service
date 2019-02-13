@@ -1,4 +1,5 @@
 from django.db import models
+from .helpers import *
 
 
 class User(models.Model):
@@ -11,6 +12,11 @@ class User(models.Model):
     verified = models.CharField(max_length=80)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def check_password(self, password):
+        if not self.password or not password:
+            return False
+        return bcrypt().check_password_hash(self.password, password)
 
     class Meta:
         db_table = 'users'
