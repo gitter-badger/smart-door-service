@@ -1,7 +1,8 @@
-bcrypt
+flask
+flask-bcrypt
 RPi.GPIO
 pytz
-Django>=1.8,<2.0
+django>=2.0.11
 sentry_sdk
 django_dotenv
 redis
