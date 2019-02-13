@@ -33,12 +33,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'tika.middlewares.HttpNotFoundExceptionMiddleware',
+    'app.middlewares.HttpNotFoundExceptionMiddleware',
 ]
 
-ROOT_URLCONF = 'tika.urls'
+ROOT_URLCONF = 'app.urls'
 
-WSGI_APPLICATION = 'tika.wsgi.application'
+WSGI_APPLICATION = 'app.wsgi.application'
 
 
 # Database
