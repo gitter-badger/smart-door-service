@@ -27,7 +27,7 @@ def create(request):
 
 
 @decorator_from_middleware(middlewares.PostRequest)
-@decorator_from_middleware(middlewares.Authenticate)
+@decorator_from_middleware(middlewares.CheckUserExistsWithToken)
 def refresh(request):
 
     jwt_token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")

@@ -22,6 +22,7 @@ DEBUG = os.getenv("DEBUG")
 ALLOWED_HOSTS = [
     u'localhost',
     u'127.0.0.1',
+    u'192.168.1.3',
 ]
 
 # Application definition
