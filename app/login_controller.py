@@ -5,7 +5,7 @@ from . import respond, middlewares, forms
 from django.utils.decorators import decorator_from_middleware
 
 
-@decorator_from_middleware(middlewares.PostRequestMiddleware)
+@decorator_from_middleware(middlewares.PostRequest)
 def create(request):
 
     params = request_params(request)
@@ -26,8 +26,8 @@ def create(request):
     return respond.unauthorized()
 
 
-@decorator_from_middleware(middlewares.PostRequestMiddleware)
-@decorator_from_middleware(middlewares.AuthenticateMiddleware)
+@decorator_from_middleware(middlewares.PostRequest)
+@decorator_from_middleware(middlewares.Authenticate)
 def refresh(request):
 
     jwt_token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")

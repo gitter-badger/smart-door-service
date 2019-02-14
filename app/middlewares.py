@@ -1,5 +1,6 @@
 import os
 import jwt
+from .helpers import *
 from django.utils.deprecation import MiddlewareMixin
 from . import respond, helpers, models
 
@@ -14,11 +15,7 @@ class HttpNotFoundExceptionMiddleware(MiddlewareMixin):
         return response
 
 
-class PostRequestMiddleware(MiddlewareMixin):
-
-    @staticmethod
-    def process_response(request, response):
-        return response
+class PostRequest(MiddlewareMixin):
 
     @staticmethod
     def process_request(request):
@@ -29,11 +26,22 @@ class PostRequestMiddleware(MiddlewareMixin):
         return None
 
 
-class AuthenticateMiddleware(MiddlewareMixin):
+class RefreshToken(MiddlewareMixin):
 
     @staticmethod
     def process_response(request, response):
+
+        if request.META.get("HTTP_AUTHORIZATION") is not None:
+
+            jwt_token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")
+            decode = decode_token(jwt_token)
+            token = create_token(decode['sub'])
+            response["Authorization"] = token
+
         return response
+
+
+class Authenticate(MiddlewareMixin):
 
     @staticmethod
     def process_request(request):

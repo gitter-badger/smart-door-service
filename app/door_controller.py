@@ -12,7 +12,7 @@ from django.utils.decorators import decorator_from_middleware
 # GPIO.setmode(GPIO.BCM)
 
 
-@decorator_from_middleware(middlewares.AuthenticateMiddleware)
+@decorator_from_middleware(middlewares.Authenticate)
 def open_door(request):
     # GPIO.setup(4, GPIO.OUT)
     # GPIO.output(4, 0)
