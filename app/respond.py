@@ -1,10 +1,18 @@
 import json
+from django.core import serializers
 from django.http import HttpResponse
 
 
 def succeed(data):
     content = json.dumps({"status": "success", "result": data})
     return HttpResponse(content, content_type="application/json", status=200)
+
+
+def model_datas(datas):
+    results = []
+    for data in json.loads(serializers.serialize('json', datas)):
+        results.append(data['fields'])
+    return results
 
 
 def update_succeeded():
