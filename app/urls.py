@@ -1,6 +1,7 @@
 import os
 from django.urls import path
 from . import door_controller
+from . import logs_controller
 from . import login_controller
 from django.conf.urls import url, include
 
@@ -10,6 +11,9 @@ urlpatterns = [
         url('auth', include([
             url('create.json', login_controller.create),
             url('refresh.json', login_controller.refresh)
+        ])),
+        url('user', include([
+            url('logs.json', logs_controller.index),
         ])),
     ])),
 ]
