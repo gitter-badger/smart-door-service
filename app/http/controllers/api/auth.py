@@ -1,7 +1,6 @@
-import jwt
-from .models import *
-from .helpers import *
-from . import respond, middlewares, forms
+from app.models import *
+from app.helpers import *
+from app.http import middlewares, respond, forms
 from django.utils.decorators import decorator_from_middleware
 
 
