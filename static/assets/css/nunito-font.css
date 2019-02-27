@@ -1,0 +1,18 @@
+@font-face {
+    font-family: nunito;
+    font-style: normal;
+    font-weight: 900;
+    src: url('/static/assets/fonts/nunito/nunito_light.ttf') format('truetype');
+}
+@font-face {
+    font-family: nunito;
+    font-style: normal;
+    font-weight: bold;
+    src: url('/static/assets/fonts/nunito/nunito_bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: nunito;
+    font-style: normal;
+    font-weight: 500;
+    src: url('/static/assets/fonts/nunito/nunito_regular.ttf') format('truetype');
+}

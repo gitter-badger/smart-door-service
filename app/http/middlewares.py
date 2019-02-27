@@ -1,8 +1,16 @@
-import os
-import jwt
-from .helpers import *
+from app.helpers import *
+from app.http import respond
+from app import helpers, models
+from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
-from . import respond, helpers, models
+
+
+class DashboardAuthenticate(MiddlewareMixin):
+
+    @staticmethod
+    def process_request(request):
+        if not request.user.is_authenticated:
+            return redirect('login')
 
 
 class HttpNotFoundExceptionMiddleware(MiddlewareMixin):

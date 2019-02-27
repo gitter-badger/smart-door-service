@@ -1,26 +1,6 @@
-from django.db import models
 from .helpers import *
-
-
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    fullname = models.CharField(max_length=80)
-    username = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
-    password = models.CharField(max_length=128)
-    avatar = models.CharField(max_length=80)
-    role_id = models.CharField(max_length=80)
-    verified = models.CharField(max_length=80)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def check_password(self, password):
-        if not self.password or not password:
-            return False
-        return bcrypt().check_password_hash(self.password, password)
-
-    class Meta:
-        db_table = 'users'
+from django.db import models
+from django.contrib.auth.models import User
 
 
 class Device(models.Model):

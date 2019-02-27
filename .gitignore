@@ -1,8 +1,5 @@
-.idea
 db.sqlite3
 .env
 *.pyc
-tika/*.pyc
-.env
+app/*.pyc
 logs/*
-.DS_Store

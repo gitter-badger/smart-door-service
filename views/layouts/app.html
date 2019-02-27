@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>SmartDoor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SmartDoor project"/>
+    <meta property="og:locale" content="en" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SmartDoor" />
+    <meta property="og:description" content="SmartDoor project" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="SmartDoor" />
+    <meta property="og:image" content="/static/assets/images/brand.svg"/>
+    <meta name="theme-color" content="#333333">
+    <link rel="shortcut icon" type="image/ico" href="/static/assets/images/brand.svg"/>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/assets/js/app.js"></script>
+    {% block header %}{% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <aside class="pull-left bg-dark sidebar full-height" id="sticky-sidebar">
+            {% include "partials/sidebar.html" %}
+        </aside>
+        <div class="content">
+            <nav class="navbar navbar-default bg-dark">
+                <div class="navbar-header">
+{#                    @if(\Illuminate\Support\Facades\Auth::check())#}
+{#                        @php($user = \Illuminate\Support\Facades\Auth::user())#}
+{#                        <a class="user-detail" href="#">#}
+{#                            <img class="user-avatar" src="/uploads/avatars/{{ $user->avatar }}" alt="">#}
+{#                            {{ $user->fullname }}#}
+{#                        </a>#}
+{#                    @endif#}
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile-footer">
+    Powered by
+    <img src="/static/assets/images/raspberrypi.svg"
+         alt="Raspberry pi"
+         class="raspberry-pi-svg" />
+    Raspberry pi
+    <div class="clearfix"></div>
+    <small>© 2019</small>
+</div>
+{% block footer %}{% endblock %}
+</body>
+</html>

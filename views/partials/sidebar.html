@@ -1,0 +1,23 @@
+<div class="brand">
+    <img class="brand-image" src="/static/assets/images/brand.svg" alt="">
+    <h4 class="brand-title">SmartDoor</h4>
+</div>
+<a onclick="show_menu()" id="show-menu">Menu</a>
+<div id="menu-close" class="row menubar">
+    <div class="col-md-12 menu">
+        <ul>
+            {% if request.user.is_authenticated %}
+                {% include "dashboard/sidebar.html" %}
+            {% endif %}
+        </ul>
+        <div class="powered-by">
+            Powered by
+            <img src="/static/assets/images/raspberrypi.svg"
+                 alt="Raspberry pi"
+                 class="raspberry-pi-svg" />
+            Raspberry pi
+            <div class="clear"></div>
+            <small>© 2019</small>
+        </div>
+    </div>
+</div>

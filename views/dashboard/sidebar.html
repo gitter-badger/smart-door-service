@@ -1,0 +1,27 @@
+{% if page == 'dashboard' %}<li class="active">{% else %}<li>{% endif %}
+    <a href="/">
+        <i class="fas fa-tachometer-alt"></i>
+        Dashboard
+    </a>
+</li>
+
+{% if page == 'users' %}<li class="active">{% else %}<li>{% endif %}
+    <a href="/users">
+        <i class="fa fa-users"></i>
+        Users
+    </a>
+</li>
+
+{% if page == 'logs' %}<li class="active">{% else %}<li>{% endif %}
+    <a href="/logs">
+        <i class="fa fa-toilet-paper"></i>
+        Logs
+    </a>
+</li>
+
+{% if page == 'settings' %}<li class="active">{% else %}<li>{% endif %}
+    <a href="/settings">
+        <i class="fa fa-sliders-h"></i>
+        Settings
+    </a>
+</li>
