@@ -23,7 +23,7 @@ class DashboardAuthenticate(MiddlewareMixin):
             return redirect('login')
 
 
-class HttpNotFoundExceptionMiddleware(MiddlewareMixin):
+class HttpExceptionHandlerMiddleware(MiddlewareMixin):
 
     @staticmethod
     def process_response(request, response):
@@ -31,10 +31,25 @@ class HttpNotFoundExceptionMiddleware(MiddlewareMixin):
             if str(request.path).startswith("/api"):
                 return respond.not_found()
 
-            return render(request, 'errors/404.html', status=404)
+            return render(request, 'errors.html', context={
+                "message": "The page youre looking for could not found!",
+                "title": "404",
+                "page_title": "404 Not found!",
+            }, status=404)
 
         if response.status_code == 403:
-            return render(request, 'errors/403.html', status=404)
+            return render(request, 'errors.html', context={
+                "message": "Forbbiden!",
+                "title": "403",
+                "page_title": "403 Forbbiden!",
+            }, status=404)
+
+        if response.status_code == 400:
+            return render(request, 'errors.html', context={
+                "message": "Forbbiden!",
+                "title": 400,
+                "page_title": "400 Forbbiden!",
+            }, status=400)
 
         return response
 

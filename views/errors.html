@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>SmartDoor | {% block page_title %}{% endblock %}</title>
+    <title>SmartDoor | {{ page_title }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="SmartDoor project"/>
@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/assets/css/app.css">
-    {% block header %}{% endblock %}
 </head>
 <body class="bg-dark-pattern">
 <div class="container-fluid">
@@ -32,9 +31,9 @@
                              alt="Logo" />
 
                         <div class="margin-top-30">
-                            <h1>{% block title %}{% endblock %}</h1>
+                            <h1>{{ title }}</h1>
 
-                            {% block message %}{% endblock %}
+                            {{ message }}
 
                             <div class="clearfix margin-bottom-30"></div>
                             <a class="" href="/">
@@ -48,6 +47,5 @@
         </div>
     </div>
 </div>
-{% block footer %}{% endblock %}
 </body>
 </html>
