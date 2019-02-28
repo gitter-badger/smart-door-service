@@ -1,7 +1,6 @@
 import os
 import re
 import yaml
-from app import adapters
 
 
 path_matcher = re.compile(r'\${([^}^{]+)\}')
@@ -30,13 +29,13 @@ def get_database_adapter(base_dir):
             config = yaml.load(stream)
 
             if os.getenv("DB_ADAPTER") == "mysql":
-                return adapters.mysql(config.get("mysql"))
+                return mysql(config.get("mysql"))
 
             if os.getenv("DB_ADAPTER") == "sqlite3":
-                return adapters.sqlite3(config.get("sqlite3"))
+                return sqlite3(config.get("sqlite3"))
 
             if os.getenv("DB_ADAPTER") == "postgresql":
-                return adapters.postgresql(config.get("postgresql"))
+                return postgresql(config.get("postgresql"))
 
         except yaml.YAMLError as exc:
             print(exc)
