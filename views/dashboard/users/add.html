@@ -1,0 +1,123 @@
+{% extends "layouts/app.html" %}
+
+{% block content %}
+
+    <h3 class="page-title">
+        Add User
+    </h3>
+    <a class="btn btn-primary page-top-button" style="margin: 25px 0; " href="/users">
+        Users
+        <i class="fa fa-users"></i>
+    </a>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+
+            <input type="text"
+                   class="form-control"
+                   id="fullname"
+                   name="fullname"
+                   placeholder="Fullname"
+                   autofocus="autofocus"
+                   value="{{ form.fullname.value | default_if_none:"" }}" />
+
+            {% if form.errors.fullname %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.fullname }}
+                </small>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+
+            <input type="text"
+                   class="form-control"
+                   id="username"
+                   name="username"
+                   placeholder="Username"
+                   value="{{ form.username.value | default_if_none:"" }}" />
+
+            {% if form.errors.username %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.username }}
+                </small>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+
+            <input type="email"
+                   class="form-control"
+                   id="email"
+                   name="email"
+                   placeholder="email"
+                   value="{{ form.email.value | default_if_none:"" }}" />
+
+            {% if form.errors.email %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.email }}
+                </small>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   name="password"
+                   placeholder="Password" />
+
+            {% if form.errors.password %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.password }}
+                </small>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+
+            <input type="password"
+                   class="form-control"
+                   id="password_confirmation"
+                   name="password_confirmation"
+                   placeholder="Password confirmation" />
+
+            {% if form.errors.password_confirmation %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.password_confirmation }}
+                </small>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+
+            <div class="clearfix"></div>
+
+            <select class="fa-pull-left" name="role" title="Role">
+                <option value="-">
+                    Select a role for user
+                </option>
+                {% for role in roles %}
+                    <option value="{{ role.id }}">
+                        {{ role.title }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <div class="clearfix"></div>
+
+            {% if form.errors.role %}
+                <small class="text-danger fa-pull-left">
+                    {{ form.errors.role }}
+                </small>
+            {% endif %}
+
+        </div>
+        <button type="submit" class="btn btn-success full-width">
+            Add
+        </button>
+    </form>
+
+{% endblock %}

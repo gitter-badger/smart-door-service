@@ -30,19 +30,35 @@
             {% include "partials/sidebar.html" %}
         </aside>
         <div class="content">
-            <nav class="navbar navbar-default bg-dark">
-                <div class="navbar-header">
-{#                    @if(\Illuminate\Support\Facades\Auth::check())#}
-{#                        @php($user = \Illuminate\Support\Facades\Auth::user())#}
-{#                        <a class="user-detail" href="#">#}
-{#                            <img class="user-avatar" src="/uploads/avatars/{{ $user->avatar }}" alt="">#}
-{#                            {{ $user->fullname }}#}
-{#                        </a>#}
-{#                    @endif#}
-                </div>
-            </nav>
+            {% if request.user.is_authenticated %}
+                <nav class="navbar navbar-default bg-dark">
+                    <div class="navbar-header">
+                        <a class="user-detail" href="#">
+                            <img class="user-avatar" src="/static/uploads/avatars/{{ user.avatar }}" alt="">
+                            {{ request.user.fullname }}
+                        </a>
+
+                        <ul class="navbar-actions">
+                            <li>
+                                <a href="/logout">
+                                    <i class="fa fa-power-off"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            {% endif %}
             <div class="container-fluid">
                 <div class="col-md-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="margin-top-30 alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                                 role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                     {% block content %}{% endblock %}
                 </div>
             </div>
@@ -50,13 +66,7 @@
     </div>
 </div>
 <div class="mobile-footer">
-    Powered by
-    <img src="/static/assets/images/raspberrypi.svg"
-         alt="Raspberry pi"
-         class="raspberry-pi-svg" />
-    Raspberry pi
-    <div class="clearfix"></div>
-    <small>© 2019</small>
+    {% include "partials/powered_by.html" %}
 </div>
 {% block footer %}{% endblock %}
 </body>

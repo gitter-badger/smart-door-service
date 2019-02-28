@@ -8,16 +8,19 @@
         <ul>
             {% if request.user.is_authenticated %}
                 {% include "dashboard/sidebar.html" %}
+            {% else %}
+
+                <li class="active">
+                    <a href="/">
+                        <i class="fa fa-arrow-alt-circle-right"></i>
+                        Login
+                    </a>
+                </li>
+
             {% endif %}
         </ul>
         <div class="powered-by">
-            Powered by
-            <img src="/static/assets/images/raspberrypi.svg"
-                 alt="Raspberry pi"
-                 class="raspberry-pi-svg" />
-            Raspberry pi
-            <div class="clear"></div>
-            <small>© 2019</small>
+            {% include "partials/powered_by.html" %}
         </div>
     </div>
 </div>

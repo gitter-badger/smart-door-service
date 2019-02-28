@@ -9,10 +9,10 @@ from flask_bcrypt import Bcrypt
 def request_params(request):
     params = {}
     for key in request.GET:
-        params[key] = request.GET[key]
+        params[key] = request.GET.get(key)
 
     for key in request.POST:
-        params[key] = request.GET[key]
+        params[key] = request.POST.get(key)
 
     return params
 

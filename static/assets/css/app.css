@@ -184,8 +184,6 @@ img.avatar {
 }
 
 form.login-form {
-    width: 40%;
-    margin: 80px auto;
 }
 
 form.login-form button {
@@ -393,6 +391,46 @@ table thead tr {
 
 table tbody td {
     text-align: left;
+}
+
+.alert {
+    text-align: left;
+}
+
+ul.errorlist {
+    list-style: none;
+    padding: 5px;
+}
+
+ul.actions {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: block;
+}
+
+ul.actions li {
+    float: left;
+    margin-left: 10px;
+}
+
+ul.navbar-actions {
+    list-style: none;
+    margin: 5px;
+    padding: 0;
+    float: right;
+}
+
+a.user-detail {
+    float: left;
+}
+
+ul.navbar-actions li {
+    float: right;
+}
+
+.navbar-header {
+    width: 100%;
 }
 
 @media (max-width: 767px) {
