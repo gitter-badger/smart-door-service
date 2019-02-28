@@ -2,9 +2,7 @@ import os
 import jwt
 import datetime
 from app import models
-from flask import Flask
 from django.conf import settings
-from flask_bcrypt import Bcrypt
 
 
 def request_params(request):
@@ -52,14 +50,6 @@ def get_jwt_payload(user_id):
         'iat': datetime.datetime.utcnow(),
         'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=int(os.getenv('JWT_EXP'))),
     }
-
-
-def bcrypt():
-    app = Flask(__name__)
-    app.config['BCRYPT_LOG_ROUNDS'] = 12
-    app.config['BCRYPT_HASH_IDENT'] = '2b'
-    app.config['BCRYPT_HANDLE_LONG_PASSWORDS'] = False
-    return Bcrypt(app)
 
 
 def trim(string):
