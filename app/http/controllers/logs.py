@@ -6,6 +6,7 @@ from django.utils.decorators import decorator_from_middleware
 
 
 @decorator_from_middleware(middlewares.DashboardAuthenticate)
+@decorator_from_middleware(middlewares.AdminAuthenticate)
 def index(request):
     return render(request, 'dashboard/logs.html', {
         "page": "logs",

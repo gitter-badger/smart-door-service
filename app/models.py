@@ -80,6 +80,10 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
+    def is_admin(self):
+        role = Role.objects.filter(title="admin").get()
+        return self.role_id is role.id
+
     class Meta:
         db_table = 'users'
 

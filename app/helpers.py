@@ -1,6 +1,7 @@
 import os
 import jwt
 import datetime
+from app import models
 from flask import Flask
 from django.conf import settings
 from flask_bcrypt import Bcrypt

@@ -183,7 +183,8 @@ img.avatar {
     color: #000000;
 }
 
-form.login-form {
+tr.banned {
+    opacity: 0.5;
 }
 
 form.login-form button {

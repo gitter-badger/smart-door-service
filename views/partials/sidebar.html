@@ -7,7 +7,11 @@
     <div class="col-md-12 menu">
         <ul>
             {% if request.user.is_authenticated %}
-                {% include "dashboard/sidebar.html" %}
+                {% if request.user.is_admin %}
+                    {% include "dashboard/admin_sidebar.html" %}
+                {% else %}
+                    {% include "dashboard/user_sidebar.html" %}
+                {% endif %}
             {% else %}
 
                 <li class="active">

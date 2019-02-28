@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 
 # view controllers
 from app.http.controllers import \
-    dashboard, users, logs, settings
+    dashboard, users, logs, settings, doc
 
 # api controllers
 from app.http.controllers.api import \
@@ -20,6 +20,7 @@ view_routes = [
     url(r'^users$', users.index, name='users'),
     url(r'^users/add$', users.create, name='add_user_form'),
     url(r'^logs$', logs.index, name='logs'),
+    url(r'^doc$', doc.index, name='doc'),
     url(r'^settings$', settings.index, name='settings'),
     url(r'^login$', views.LoginView.as_view(), name='login'),
     url(r'^logout$', views.LogoutView.as_view(), name='logout'),

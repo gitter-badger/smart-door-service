@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 @decorator_from_middleware(middlewares.DashboardAuthenticate)
+@decorator_from_middleware(middlewares.AdminAuthenticate)
 def index(request):
     return render(request, 'dashboard/users/index.html', {
         "page": "users",
@@ -18,6 +19,7 @@ def index(request):
 
 @csrf_protect
 @decorator_from_middleware(middlewares.DashboardAuthenticate)
+@decorator_from_middleware(middlewares.AdminAuthenticate)
 def create(request):
 
     if request.method == "POST":

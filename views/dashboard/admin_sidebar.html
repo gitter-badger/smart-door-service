@@ -5,6 +5,13 @@
     </a>
 </li>
 
+{% if page == 'doc' %}<li class="active">{% else %}<li>{% endif %}
+    <a href="/doc">
+        <i class="fas fa-book"></i>
+        Documentation
+    </a>
+</li>
+
 {% if page == 'users' %}<li class="active">{% else %}<li>{% endif %}
     <a href="/users">
         <i class="fa fa-users"></i>

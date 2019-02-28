@@ -34,7 +34,7 @@
             </thead>
             <tbody>
             {% for user in users %}
-                <tr>
+                <tr {% if not user.is_active %}class="banned"{% endif %}>
                     <td scope="row" class="text-center" style="width:2%">
                         {{ user.id }}
                     </td>
@@ -71,7 +71,7 @@
                             </li>
                             <li>
                                 <a class="text-danger" href="/logs/user/{{ user.id }}">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-ban"></i>
                                 </a>
                             </li>
                         </ul>

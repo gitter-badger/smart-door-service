@@ -1,8 +1,17 @@
+from app import models
 from app.helpers import *
 from app.http import respond
-from app import helpers, models
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
+
+
+class AdminAuthenticate(MiddlewareMixin):
+
+    @staticmethod
+    def process_request(request):
+
+        if not request.user.is_admin():
+            return redirect('dashboard')
 
 
 class DashboardAuthenticate(MiddlewareMixin):
