@@ -13,11 +13,7 @@ SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = [
-    u'localhost',
-    u'127.0.0.1',
-    u'192.168.1.3',
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
