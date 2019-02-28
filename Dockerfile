@@ -8,19 +8,19 @@ WORKDIR /code
 
 ADD requirements.txt /code/
 
+# Installing project requirements
 RUN pip3 install -r requirements.txt
 
+# Generating env file
 ADD .env.example /code/.env
-
-ENV JWT_SECRET_KEY secret
 
 ADD . /code
 
+# Creating database sqlite3 file
 RUN touch /code/db/development.sqlite3
 
-RUN python3 manage.py migrate
-
-RUN python3 manage.py seed
+# Running migrations then seed the database
+RUN python3 manage.py migrate && python3 manage.py seed
 
 EXPOSE 8000
 
