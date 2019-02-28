@@ -23,6 +23,7 @@ body {
 }
 
 .sidebar {
+    background-color: #252a2d !important;
     padding: 10px;
     background: url(/static/assets/images/pattern.png) no-repeat top;
     background-size: contain;
@@ -33,6 +34,7 @@ body {
     position: fixed;
     transition: height 0.25s ease-in-out 0s;
     left: 0;
+    box-shadow: 1px 1px 10px #252a2d;
 }
 
 .container-fluid,
@@ -371,6 +373,7 @@ tr.un-read {
     border: 0;
     border-radius: 0;
     color: #ffffff;
+    background-color: #252a2d !important;
 }
 
 .user-avatar {
@@ -446,6 +449,14 @@ ul.navbar-actions li {
     margin-top: 70px;
 }
 
+.form-control-dark {
+    background: #212529;
+    border: 0;
+    color: #fff;
+    border-bottom: 4px solid #32383e;;
+    border-radius: 0;
+}
+
 @media (max-width: 767px) {
     #menu-open { display: block; }
     #show-menu {
@@ -460,9 +471,12 @@ ul.navbar-actions li {
     .social-menu li { float: right; }
     .fixed-bottom, .powered-by, #menu-close { display: none; }
     .mobile-footer {
-        display: block !important;
         padding: 20px;
-        background: #005ab2;
+        background: #252a2d;
+        position: fixed;
+        bottom: 0;
+        display: block;
+        width: 100%;
     }
     .social-menu {
         float: right !important;
@@ -473,7 +487,7 @@ ul.navbar-actions li {
     }
     .content {
         margin-right: 0 !important;
-        margin-top: 50%;
+        margin-top: 52%;
         padding-left: 0;
         margin-bottom: 20px;
     }

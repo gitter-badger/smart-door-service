@@ -4,3 +4,4 @@ django==2.1.7
 django_dotenv
 PyJWT
 pyyaml
+gunicorn

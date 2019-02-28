@@ -23,7 +23,7 @@
     <script type="text/javascript" src="/static/assets/js/app.js"></script>
     {% block header %}{% endblock %}
 </head>
-<body>
+<body class="bg-dark text-white">
 <div class="container-fluid">
     <div class="row">
         <aside class="pull-left bg-dark sidebar full-height" id="sticky-sidebar">
@@ -35,7 +35,7 @@
                     <div class="navbar-header">
                         <a class="user-detail" href="#">
                             <img class="user-avatar" src="/static/uploads/avatars/{{ user.avatar }}" alt="">
-                            {{ request.user.fullname }}
+                            Youre logged in as {{ request.user.fullname }}
                         </a>
 
                         <ul class="navbar-actions">
