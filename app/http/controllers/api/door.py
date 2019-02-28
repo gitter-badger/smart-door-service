@@ -2,6 +2,7 @@ import time
 # import RPi.GPIO as GPIO
 from app import models
 from app.http import middlewares, respond
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import decorator_from_middleware
 
 
@@ -9,6 +10,7 @@ from django.utils.decorators import decorator_from_middleware
 # GPIO.setmode(GPIO.BCM)
 
 
+@csrf_exempt
 @decorator_from_middleware(middlewares.Authenticate)
 @decorator_from_middleware(middlewares.DetectDevice)
 def open_door(request):
@@ -20,7 +22,7 @@ def open_door(request):
     log_type = models.LogType.objects.get_or_create(
         pin_id=4,
         icon="fa fa-door-open",
-        property=1,
+        priority=1,
     )
 
     models.Log.objects.create(
@@ -29,4 +31,4 @@ def open_door(request):
         device_id=request.device.id
     )
 
-    return respond.update_succeeded()
+    return respond.succeed_message("The yard door opened successfully!")

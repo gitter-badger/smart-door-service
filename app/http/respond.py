@@ -8,6 +8,11 @@ def succeed(data):
     return HttpResponse(content, content_type="application/json", status=200)
 
 
+def succeed_message(message):
+    content = json.dumps({"status": "success", "message": message})
+    return HttpResponse(content, content_type="application/json", status=200)
+
+
 def model_datas(datas):
     results = []
     for data in json.loads(serializers.serialize('json', datas)):
@@ -19,13 +24,17 @@ def update_succeeded():
     return succeed("The requested parameter is updated successfully!")
 
 
-def failed(message="", status_code=400):
+def insert_succeeded():
+    return succeed("The requested parameter is Added successfully!")
+
+
+def failed(message, status_code=400):
     content = json.dumps({"status": "fail", "message": message})
     return HttpResponse(content, content_type="application/json", status=status_code)
 
 
-def method_not_allowed():
-    return failed("Oops... The method you requested is not allowed!", 405)
+def method_not_allowed(message="Oops... The method you requested is not allowed!"):
+    return failed(message, 405)
 
 
 def validation_error(errors=None, status_code=422):
@@ -33,12 +42,8 @@ def validation_error(errors=None, status_code=422):
     return HttpResponse(content, content_type="application/json", status=status_code)
 
 
-def healthy():
-    return succeed("Server is healthy.")
-
-
-def unauthorized():
-    return failed("Unauthorized.")
+def unauthorized(message="Unauthorized."):
+    return failed(message, 401)
 
 
 def not_found(message="Oops... The requested page not found!"):

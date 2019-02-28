@@ -1,8 +1,10 @@
 import platform
 from app.helpers import *
 from app.http import respond
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def check(request):
 
     uri = request.scheme + "://" + request.META['HTTP_HOST']
@@ -11,9 +13,9 @@ def check(request):
     if os.getenv("BASE_URI") is not None and os.getenv("BASE_URI") is not "":
         uri = os.getenv("BASE_URI")
 
-    api_base_uri = uri + "/" + os.getenv("APP_VERSION")
+    api_base_uri = uri + "/api/" + os.getenv("APP_VERSION")
 
-    avatars_base_uri = uri + "/uploads/avatars"
+    avatars_base_uri = uri + "/static/uploads/avatars"
 
     if os.getenv("API_BASE_URI") is not None and os.getenv("API_BASE_URI") is not "":
         api_base_uri = os.getenv("API_BASE_URI")

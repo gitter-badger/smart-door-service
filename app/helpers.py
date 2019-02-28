@@ -26,12 +26,12 @@ def create_token(user_id):
     return str(token, 'utf-8')
 
 
-def decode_token(token):
+def decode_token(token, verify_exp=True):
     return jwt.decode(
         trim(token),
         os.getenv("JWT_SECRET_KEY"),
         algorithm=os.getenv("JWT_ALGORITHM"),
-        verify=False
+        options={'verify_exp': verify_exp}
     )
 
 

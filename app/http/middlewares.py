@@ -1,5 +1,7 @@
+import os
+import jwt
 from app import models
-from app.helpers import *
+from app import helpers
 from app.http import respond
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -27,29 +29,33 @@ class HttpExceptionHandlerMiddleware(MiddlewareMixin):
 
     @staticmethod
     def process_response(request, response):
-        if response.status_code == 404:
-            if str(request.path).startswith("/api"):
+
+        if str(request.path).endswith("json"):
+
+            if response.status_code == 404:
                 return respond.not_found()
 
-            return render(request, 'errors.html', context={
-                "message": "The page youre looking for could not found!",
-                "title": "404",
-                "page_title": "404 Not found!",
-            }, status=404)
+        if not str(request.path).endswith("json"):
+            if response.status_code == 404:
+                return render(request, 'errors.html', context={
+                    "message": "The page youre looking for could not found!",
+                    "title": "404",
+                    "page_title": "404 Not found!",
+                }, status=404)
 
-        if response.status_code == 403:
-            return render(request, 'errors.html', context={
-                "message": "Forbbiden!",
-                "title": "403",
-                "page_title": "403 Forbbiden!",
-            }, status=404)
+            if response.status_code == 403:
+                return render(request, 'errors.html', context={
+                    "message": "Forbbiden!",
+                    "title": "403",
+                    "page_title": "403 Forbbiden!",
+                }, status=404)
 
-        if response.status_code == 400:
-            return render(request, 'errors.html', context={
-                "message": "Forbbiden!",
-                "title": 400,
-                "page_title": "400 Forbbiden!",
-            }, status=400)
+            if response.status_code == 400:
+                return render(request, 'errors.html', context={
+                    "message": "Forbbiden!",
+                    "title": 400,
+                    "page_title": "400 Forbbiden!",
+                }, status=400)
 
         return response
 
@@ -73,8 +79,8 @@ class RefreshToken(MiddlewareMixin):
         if request.META.get("HTTP_AUTHORIZATION") is not None:
 
             jwt_token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")
-            decode = decode_token(jwt_token)
-            token = create_token(decode['sub'])
+            decode = helpers.decode_token(jwt_token, False)
+            token = helpers.create_token(decode['sub'])
             response["Authorization"] = token
 
         return response
@@ -86,18 +92,13 @@ class CheckUserExistsWithToken(MiddlewareMixin):
     def process_request(request):
 
         if request.META.get("HTTP_AUTHORIZATION") is None:
-            return respond.failed("Token is required!")
+            return respond.failed("Token is required!", 422)
 
         try:
 
             token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")
 
-            decode = jwt.decode(
-                helpers.trim(token),
-                os.getenv("JWT_SECRET_KEY"),
-                algorithm=os.getenv("JWT_ALGORITHM"),
-                verify=False
-            )
+            decode = helpers.decode_token(token, False)
 
             user = models.User.objects.filter(id=decode['sub'])
 
@@ -105,7 +106,7 @@ class CheckUserExistsWithToken(MiddlewareMixin):
                 request.user = user.get()
                 return None
 
-        except Exception or jwt.exceptions.DecodeError:
+        except Exception or jwt.exceptions.DecodeError as e:
             return respond.unauthorized()
 
         return respond.unauthorized()
@@ -117,17 +118,13 @@ class Authenticate(MiddlewareMixin):
     def process_request(request):
 
         if request.META.get("HTTP_AUTHORIZATION") is None:
-            return respond.failed("Token is required!")
+            return respond.failed("Token is required!", 422)
 
         try:
 
             token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")
 
-            decode = jwt.decode(
-                helpers.trim(token),
-                os.getenv("JWT_SECRET_KEY"),
-                algorithm=os.getenv("JWT_ALGORITHM")
-            )
+            decode = helpers.decode_token(token)
 
             user = models.User.objects.filter(id=decode['sub'])
 
@@ -135,7 +132,7 @@ class Authenticate(MiddlewareMixin):
                 request.user = user.get()
                 return None
 
-        except Exception or jwt.exceptions.ExpiredSignature:
+        except Exception or jwt.exceptions.ExpiredSignature as e:
             return respond.unauthorized()
 
         return respond.unauthorized()
