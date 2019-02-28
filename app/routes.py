@@ -1,6 +1,9 @@
 import os
 from django.conf.urls import url, include
 
+from django.contrib.staticfiles.urls import\
+    staticfiles_urlpatterns
+
 # view controllers
 from app.http.controllers import \
     dashboard, users, logs, settings, doc
@@ -55,3 +58,6 @@ api_routes = [
 ]
 
 urlpatterns = view_routes + api_routes
+
+# Adding static files
+urlpatterns += staticfiles_urlpatterns()
