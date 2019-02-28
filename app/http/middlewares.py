@@ -1,6 +1,7 @@
 from app import models
 from app.helpers import *
 from app.http import respond
+from django.shortcuts import render
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 
@@ -27,7 +28,13 @@ class HttpNotFoundExceptionMiddleware(MiddlewareMixin):
     @staticmethod
     def process_response(request, response):
         if response.status_code == 404:
-            return respond.not_found()
+            if str(request.path).startswith("/api"):
+                return respond.not_found()
+
+            return render(request, 'errors/404.html', status=404)
+
+        if response.status_code == 403:
+            return render(request, 'errors/403.html', status=404)
 
         return response
 

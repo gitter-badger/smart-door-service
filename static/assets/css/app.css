@@ -434,6 +434,18 @@ ul.navbar-actions li {
     width: 100%;
 }
 
+.bg-dark-pattern {
+    background: #343a40 url(/static/assets/images/pattern.png) repeat-x;
+}
+
+.errors-top-brand {
+    width: 80px;
+}
+
+.login-form {
+    margin-top: 70px;
+}
+
 @media (max-width: 767px) {
     #menu-open { display: block; }
     #show-menu {

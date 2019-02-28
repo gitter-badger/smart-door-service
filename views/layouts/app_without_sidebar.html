@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>SmartDoor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SmartDoor project"/>
+    <meta property="og:locale" content="en" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SmartDoor" />
+    <meta property="og:description" content="SmartDoor project" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="SmartDoor" />
+    <meta property="og:image" content="/static/assets/images/brand.svg"/>
+    <meta name="theme-color" content="#333333">
+    <link rel="shortcut icon" type="image/ico" href="/static/assets/images/brand.svg"/>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/assets/css/app.css">
+    {% block header %}{% endblock %}
+</head>
+<body class="bg-dark-pattern">
+<div class="container-fluid">
+    <div class="row">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="offset-md-6 col-md-3 fa-pull-right margin-top-30">
+                    <div class="error text-center text-white">
+                        <img class="errors-top-brand margin-bottom-30 margin-top-30"
+                             src="/static/assets/images/brand.svg"
+                             alt="Logo" />
+
+                        <div class="margin-top-30">
+                            <h2>{% block title %}{% endblock %}</h2>
+
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block footer %}{% endblock %}
+</body>
+</html>

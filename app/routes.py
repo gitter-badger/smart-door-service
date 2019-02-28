@@ -22,7 +22,7 @@ view_routes = [
     url(r'^logs$', logs.index, name='logs'),
     url(r'^doc$', doc.index, name='doc'),
     url(r'^settings$', settings.index, name='settings'),
-    url(r'^login$', views.LoginView.as_view(), name='login'),
+    url(r'^login$', views.LoginView.as_view(template_name='authentication/login.html'), name='login'),
     url(r'^logout$', views.LogoutView.as_view(), name='logout'),
 ]
 
