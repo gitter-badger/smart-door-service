@@ -1,12 +1,8 @@
-flask
 flask-bcrypt
 RPi.GPIO
 pytz
-django>=2.0.11
-sentry_sdk
+django==2.1.7
 django_dotenv
-redis
 djangorestframework-jwt
-mysqlclient
 PyJWT
 pyyaml
