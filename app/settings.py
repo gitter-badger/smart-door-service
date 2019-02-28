@@ -1,6 +1,8 @@
 import os
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+from app import adapters
+
+# import sentry_sdk
+# from sentry_sdk.integrations.django import DjangoIntegration
 
 # sentry_sdk.init(
 #     dsn=os.getenv("SENTRY_DSN"),
@@ -53,6 +55,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
+AUTH_USER_MODEL = 'app.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -71,19 +75,7 @@ TEMPLATES = [
     },
 ]
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),   # Or an IP Address that your DB is hosted on
-        'PORT': os.getenv('DB_PORT'),
-    }
-}
+DATABASES = adapters.get_database_adapter(BASE_DIR)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

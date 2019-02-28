@@ -9,3 +9,4 @@ redis
 djangorestframework-jwt
 mysqlclient
 PyJWT
+pyyaml
