@@ -1,0 +1,7 @@
+event: Event
+high_priority: High priority
+medium_priority: Medium priority
+low_priority: Low priority
+pins:
+  4: Opened the yard door.
+  17: Switched the lights.

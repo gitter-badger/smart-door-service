@@ -457,6 +457,36 @@ ul.navbar-actions li {
     border-radius: 0;
 }
 
+li.prev > span, li.prev > a {
+    border-radius: 3px 0 0 3px !important;
+}
+
+li.next > span, li.next > a {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+li.current:hover, li.current:hover > span {
+    cursor: default !important;
+    background: #1f2226;
+    color: #fff;
+}
+
+li.current {
+    background: #1f2226;
+    border: 0;
+    margin-right: 10px;
+    color: #fff;
+    border-radius: 4px;
+}
+
+table.table > thead > tr > th {
+    text-align: left;
+}
+
+table.table > thead > tr > th:first-child {
+    text-align: center !important;
+}
+
 @media (max-width: 767px) {
     #menu-open { display: block; }
     #show-menu {

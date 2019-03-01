@@ -1,0 +1,113 @@
+{% extends "layouts/app.html" %}
+
+{% block content %}
+
+    <h3 class="page-title">Logs</h3>
+
+    <div class="clearfix"></div>
+
+    {% if is_empty %}
+
+        <div class="alert alert-warning">
+            There's no log exists!
+        </div>
+
+    {% else %}
+
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Event</th>
+                <th>Device</th>
+                <th>Priority</th>
+                <th>Created at</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% load lang %}
+                {% for log in datas.object_list %}
+                    <tr {% if not log.readed %}  {% endif %}>
+                        <td class="text-center" style="width:3%">
+                            {{ log.id }}
+                        </td>
+                        <td style="width:25%">
+                            <img class="left-side-avatar"
+                                 src="/static/uploads/avatars/{{ log.user.avatar }}" />
+                            {{ log.user.fullname }}
+                        </td>
+                        <td style="width:22%">
+                            <i class="{{ log.type.icon }}"></i>
+                            {{  log.type.pin_id|get_pin_title }}
+                        </td>
+                        <td style="width:13%">
+                            <i class="{{ log.device.icon }}"></i>
+                            {{ log.device.os|get_device_name }}
+                        </td>
+                        <td style="width:15%">
+
+                            {% if log.type.priority == "1" %}
+                                <span class="badge badge-danger">
+                                    High priority
+                                </span>
+                            {% endif %}
+
+                            {% if log.type.priority == "0" %}
+                                <span class="badge badge-warning">
+                                    Low priority
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td style="width:15%">
+                            <i class="fa fa-clock"></i>
+                            {{ log.created_at }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-5 offset-3 fa-pull-right bottom-paginator">
+
+            <ul class="pagination">
+
+                <li class="current page-link">
+                    <span>
+                        Page {{ datas.number }} of {{ datas.paginator.num_pages }}.
+                    </span>
+                </li>
+
+                {% if datas.has_previous %}
+                    <li class="page-item prev">
+                        <a class="page-link"
+                           href="?page={{ datas.previous_page_number }}"
+                           rel="prev" aria-label="pagination.previous">‹ Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled prev" aria-disabled="true" aria-label="pagination.previous">
+                        <span class="page-link" aria-hidden="true">‹ Previous</span>
+                    </li>
+                {% endif %}
+
+                {% if datas.has_next %}
+                    <li class="page-item next">
+                        <a class="page-link"
+                           href="?page={{ datas.next_page_number }}"
+                           rel="next" aria-label="pagination.next"> Next ›</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled next" aria-disabled="true" aria-label="pagination.next">
+                        <span class="page-link" aria-hidden="true"> Next ›</span>
+                    </li>
+                {% endif %}
+
+            </ul>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}
