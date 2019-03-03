@@ -4,6 +4,7 @@ from app import models
 from app.http import middlewares, respond
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import decorator_from_middleware
+from django.views.decorators.http import require_POST
 
 
 # GPIO.setwarnings(False)
@@ -11,6 +12,7 @@ from django.utils.decorators import decorator_from_middleware
 
 
 @csrf_exempt
+@require_POST
 @decorator_from_middleware(middlewares.Authenticate)
 @decorator_from_middleware(middlewares.DetectDevice)
 def open_door(request):

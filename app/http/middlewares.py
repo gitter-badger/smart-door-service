@@ -35,7 +35,18 @@ class HttpExceptionHandlerMiddleware(MiddlewareMixin):
             if response.status_code == 404:
                 return respond.not_found()
 
+            if response.status_code == 405:
+                return respond.method_not_allowed()
+
         if not str(request.path).endswith("json"):
+
+            if response.status_code == 405:
+                return render(request, 'errors.html', context={
+                    "message": "Method not allowed!",
+                    "title": "405",
+                    "page_title": "405 Method not allowed!",
+                }, status=404)
+
             if response.status_code == 404:
                 return render(request, 'errors.html', context={
                     "message": "The page youre looking for could not found!",
@@ -58,17 +69,6 @@ class HttpExceptionHandlerMiddleware(MiddlewareMixin):
                 }, status=400)
 
         return response
-
-
-class PostRequest(MiddlewareMixin):
-
-    @staticmethod
-    def process_request(request):
-
-        if request.method != "POST":
-            return respond.method_not_allowed()
-
-        return None
 
 
 class RefreshToken(MiddlewareMixin):

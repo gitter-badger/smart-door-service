@@ -6,18 +6,16 @@ RUN mkdir /code
 
 WORKDIR /code
 
-ADD requirements.txt /code/
-
 # Installing project requirements
 RUN pip3 install -r requirements.txt
 
 # Generating env file
-ADD .env.example /code/.env
-
-ADD . /code
+ADD .env.example .env
 
 # Creating database sqlite3 file
-RUN touch /code/db/development.sqlite3
+RUN touch ./db/development.sqlite3
+
+ADD . /code
 
 # Running migrations then seed the database
 RUN python3 manage.py migrate && python3 manage.py seed

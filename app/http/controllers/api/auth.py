@@ -3,10 +3,11 @@ from app.helpers import *
 from app.http import middlewares, respond, forms
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import decorator_from_middleware
+from django.views.decorators.http import require_POST
 
 
 @csrf_exempt
-@decorator_from_middleware(middlewares.PostRequest)
+@require_POST
 def create(request):
 
     params = request_params(request)
@@ -28,7 +29,7 @@ def create(request):
 
 
 @csrf_exempt
-@decorator_from_middleware(middlewares.PostRequest)
+@require_POST
 @decorator_from_middleware(middlewares.CheckUserExistsWithToken)
 def refresh(request):
 
