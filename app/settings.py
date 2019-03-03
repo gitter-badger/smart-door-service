@@ -35,7 +35,7 @@ MIDDLEWARE = [
     'app.http.middlewares.HttpExceptionHandlerMiddleware',
 ]
 
-ROOT_URLCONF = 'app.routes'
+ROOT_URLCONF = 'app.http.routes'
 
 LOGIN_REDIRECT_URL = '/'
 

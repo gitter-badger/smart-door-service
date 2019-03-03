@@ -13,7 +13,8 @@ from app.http.controllers.api import \
     auth as api_auth, \
     door as api_door, \
     logs as api_logs, \
-    system as api_system
+    system as api_system,\
+    accessories as api_accessories
 
 from django.contrib.auth import views
 
@@ -47,6 +48,8 @@ api_routes = [
 
             # Handle gpio (door) pin with door route
             url('door/open.json', api_door.open_door),
+
+            url('accessories.json', api_accessories.index),
 
             # User data routes
             url('user', include([
