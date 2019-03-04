@@ -1,28 +1,27 @@
-from app.models import *
-from app.helpers import *
+from app import helpers, serializers, models
 from app.http import middlewares, respond, forms
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import decorator_from_middleware
 from django.views.decorators.http import require_POST
+from django.utils.decorators import decorator_from_middleware
 
 
 @csrf_exempt
 @require_POST
 def create(request):
 
-    params = request_params(request)
+    params = helpers.request_params(request)
 
     form = forms.CreateAuthTokenForm(params)
 
     if not form.is_valid():
         return respond.validation_error(form.errors)
 
-    user = User.objects.get(username=params['username'])
+    user = models.User.objects.get(username=params['username'])
+
     if user.check_password(params['password']):
-        token = create_token(user.id)
         return respond.succeed({
-            "user": get_user_attributes(user),
-            "token": token
+            "user": serializers.UserSerializer(user).data,
+            "token": helpers.create_token(user.id)
         })
 
     return respond.unauthorized()
@@ -35,8 +34,10 @@ def refresh(request):
 
     jwt_token = request.META['HTTP_AUTHORIZATION'].replace("Bearer ", "")
 
-    decode = decode_token(jwt_token, False)
-    user = User.objects.get(id=decode['sub'])
+    decode = helpers.decode_token(jwt_token, False)
+    user = models.User.objects.get(id=decode['sub'])
 
-    token = create_token(decode['sub'])
-    return respond.succeed({"user": get_user_attributes(user), "token": token})
+    return respond.succeed({
+        "user": serializers.UserSerializer(user).data, 
+        "token": helpers.create_token(decode['sub'])
+    })

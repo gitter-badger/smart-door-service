@@ -21,15 +21,11 @@ def open_door(request):
     time.sleep(.40)
     # GPIO.output(4, 1)
 
-    log_type = models.LogType.objects.get_or_create(
-        pin_id=4,
-        icon="fa fa-door-open",
-        priority=1,
-    )
+    accessory = models.Accessory.objects.filter(name="Door").get()
 
     models.Log.objects.create(
         user_id=request.user.id,
-        type_id=log_type[0].id,
+        accessory_id=accessory.id,
         device_id=request.device.id
     )
 

@@ -21,7 +21,7 @@
                 <th>User</th>
                 <th>Event</th>
                 <th>Device</th>
-                <th>Priority</th>
+                <th>Accessory</th>
                 <th>Created at</th>
             </tr>
             </thead>
@@ -38,26 +38,15 @@
                             {{ log.user.fullname }}
                         </td>
                         <td style="width:22%">
-                            <i class="{{ log.type.icon }}"></i>
-                            {{  log.type.pin_id|get_pin_title }}
+                            <i class="{{ log.accessory.icon }}"></i>
+                            {{  log.accessory.pin_id|get_pin_title }}
                         </td>
                         <td style="width:13%">
                             <i class="{{ log.device.icon }}"></i>
                             {{ log.device.os|get_device_name }}
                         </td>
                         <td style="width:15%">
-
-                            {% if log.type.priority == "1" %}
-                                <span class="badge badge-danger">
-                                    High priority
-                                </span>
-                            {% endif %}
-
-                            {% if log.type.priority == "0" %}
-                                <span class="badge badge-warning">
-                                    Low priority
-                                </span>
-                            {% endif %}
+                            {{ log.accessory.name }}
                         </td>
                         <td style="width:15%">
                             <i class="fa fa-clock"></i>

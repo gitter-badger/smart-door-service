@@ -101,24 +101,24 @@ class Device(models.Model):
         db_table = 'devices'
 
 
-class LogType(models.Model):
+class Accessory(models.Model):
     id = models.AutoField(primary_key=True)
-    priority = models.CharField(max_length=80)
-    pin_id = models.CharField(max_length=80)
-    icon = models.CharField(max_length=80)
+    name = models.CharField(max_length=100)
+    action = models.CharField(max_length=100)
+    pin_id = models.IntegerField(null=False)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        db_table = 'log_types'
+        db_table = 'accessories'
 
 
 class Log(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    device = models.ForeignKey(Device, on_delete=None, related_name='device')
-    type = models.ForeignKey(LogType, on_delete=None, related_name='type')
-    readed = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    device = models.ForeignKey(Device, on_delete=None)
+    accessory = models.ForeignKey(Accessory, on_delete=None)
+    checked = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:

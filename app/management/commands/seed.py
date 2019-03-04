@@ -9,6 +9,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('seeding data...')
 
+        models.Accessory.objects.get_or_create(
+            name="Door",
+            action="switch",
+            pin_id=4
+        )
+
         models.Role.objects.get_or_create(title="user")
         admin_role = models.Role.objects.get_or_create(title="admin")
 
